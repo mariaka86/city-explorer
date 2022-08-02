@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
+
 
 class App extends React.Component{
   constructor(props){
@@ -25,11 +25,11 @@ event.preventDefault();
 
 //adding loc iq url
 //getting a cors error
-let url=  `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`;
+let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
 try{
 //axios returns with location object
  let locationResponse = await axios.get(url);
-console.log("City Info: ", locationResponse.data[0]);
+console.log("City Info:", locationResponse.data[0]);
   this.setState({
     data:locationResponse[0],
     error:''
@@ -46,33 +46,33 @@ render() {
   return (
     <>
     <div className="App">
-    <Form onSubmit ={this.submitCityHandler}>
+    <form onSubmit ={this.submitCityHandler}>
       <label>
         Pick a City
         <input type= "text" onChange= {this.handleCityInput}/>
       </label>
       <button type ="submit"> Explore!</button>
-    </Form>  
+    </form>  
       </div>
       {
                     (this.state.data && !this.state.error) &&
                     <main className="erroneus">
                         <h3>{this.state.data.display_name}</h3>
                         <row>
-                            Latitude: {this.state.data.latitude}<br/>
-                            Longitude: {this.state.data.longitude}
+                            Latitude: {this.state.data.lat}<br/>
+                            Longitude: {this.state.data.lon}
                         </row>
-                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.latitude},${this.state.data.longitude}&zoom=12`} alt ="location map" id ="map"></img>
+                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.lat},${this.state.data.lon}&zoom=12`} alt ="location map" id ="map"></img>
                     </main>
                 }
                 {
                     this.state.error &&
-                    <main className="erroneus">
-                        <h3>unable to geocode!</h3>
+                    <div className="erroneus">
+                        <h4>unable to geocode!</h4>
                         <p>
                             Error: {this.state.error.response.data.error}
                         </p>
-                    </main>
+                    </div>
                 }
     </>
   );
