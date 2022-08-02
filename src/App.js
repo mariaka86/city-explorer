@@ -32,7 +32,7 @@ try{
  let locationResponse = await axios.get(url);
 console.log("City Info:", locationResponse.data[0]);
   this.setState({
-    data:locationResponse[0],
+    cityData:locationResponse.data[0],
     error:''
   })
   
@@ -44,6 +44,10 @@ console.log("City Info:", locationResponse.data[0]);
 
 };
 render() {
+  console.log ('from state',this.state.cityData.display_name);
+
+
+  
   return (
     <>
     <div className="App">
@@ -55,6 +59,7 @@ render() {
       <button type ="submit"> Explore!</button>
     </form>  
       </div>
+
       {
                     (this.state.data && !this.state.error) &&
                     <main className="erroneus">
@@ -68,14 +73,15 @@ render() {
                         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.lat},${this.state.data.lon}&zoom=12`} alt ="location map" id ="map"></img>
                     </main>
                 }
+                
                 {
                     this.state.error &&
-                    <div className="erroneus">
+                    <main className="erroneus">
                         <h4>unable to geocode!</h4>
                         <p>
                             Error: {this.state.error.response.data.error}
                         </p>
-                    </div>
+                    </main>
                 }
     </>
   );
