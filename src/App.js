@@ -16,7 +16,7 @@ class App extends React.Component{
 // calling api
 handleCityInput = (event) => {
   this.setState({
-    city: event.target.value,
+    city: event.target.value
   });
 }
 //get location data
