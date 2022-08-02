@@ -2,7 +2,8 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class App extends React.Component{
   constructor(props){
@@ -58,10 +59,12 @@ render() {
                     (this.state.data && !this.state.error) &&
                     <main className="erroneus">
                         <h3>{this.state.data.display_name}</h3>
-                        <row>
-                            Latitude: {this.state.data.lat}<br/>
-                            Longitude: {this.state.data.lon}
-                        </row>
+                        <Row>
+                          <Col>
+                            Latitude: {this.state.cityData.lat}<br/>
+                            Longitude: {this.state.cityData.lon}
+                            </Col>
+                        </Row>
                         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.lat},${this.state.data.lon}&zoom=12`} alt ="location map" id ="map"></img>
                     </main>
                 }
