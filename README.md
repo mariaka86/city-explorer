@@ -13,6 +13,6 @@ This app uses React JSX and axios in communication with LocationIQ.
 
 ## Change Log
 08-01-2022 9:30 PM - Readme updated
-##Credit and Collaborations
+## Credit and Collaborations
 ## Whiteboard image path
 
