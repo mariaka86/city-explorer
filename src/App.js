@@ -62,7 +62,7 @@ render() {
                             Latitude: {this.state.data.latitude}<br/>
                             Longitude: {this.state.data.longitude}
                         </p>
-                        <img className="map-image" alt="map" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.latitude},${this.state.data.longitude}&zoom=12`}></img>
+                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.latitude},${this.state.data.longitude}&zoom=12`} alt ="location map" id ="map"></img>
                     </main>
                 }
                 {
