@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-
+import Form from 'react-bootstrap/Form';
 
 class App extends React.Component{
   constructor(props){
@@ -46,22 +46,22 @@ render() {
   return (
     <>
     <div className="App">
-    <form onSubmit ={this.submitCityHandler}>
+    <Form onSubmit ={this.submitCityHandler}>
       <label>
         Pick a City
         <input type= "text" onChange= {this.handleCityInput}/>
       </label>
       <button type ="submit"> Explore!</button>
-    </form>  
+    </Form>  
       </div>
       {
                     (this.state.data && !this.state.error) &&
                     <main className="erroneus">
                         <h3>{this.state.data.display_name}</h3>
-                        <p>
+                        <row>
                             Latitude: {this.state.data.latitude}<br/>
                             Longitude: {this.state.data.longitude}
-                        </p>
+                        </row>
                         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.latitude},${this.state.data.longitude}&zoom=12`} alt ="location map" id ="map"></img>
                     </main>
                 }
