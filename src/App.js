@@ -2,8 +2,8 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class App extends React.Component{
   constructor(props){
@@ -12,6 +12,8 @@ class App extends React.Component{
       city:"",
       searchLocations:[],
       cityData:{},
+      error:false,
+      errorMessage:"",
     };
   }
 // calling api
@@ -33,7 +35,7 @@ try{
 console.log("City Info:", locationResponse.data[0]);
   this.setState({
     cityData:locationResponse.data[0],
-    error:''
+    error:false
   })
   
 } catch(error){
@@ -44,33 +46,38 @@ console.log("City Info:", locationResponse.data[0]);
 
 };
 render() {
-  console.log ('from state',this.state.cityData.display_name);
+  console.log ('from state',this.state.cityData, this.state.cityData.lon, this.state.cityData.lat);
 
+//  let stateList = this.state.locationResponse((stateName,index)=>{
+//   return <li key ={index}>{stateName.name}</li>
+//  })
 
-  
   return (
     <>
     <div className="App">
-    <form onSubmit ={this.submitCityHandler}>
+    <form onSubmit={this.submitCityHandler}>
       <label>
         Pick a City
-        <input type= "text" onChange= {this.handleCityInput}/>
+        <input type="text" onChange={this.handleCityInput}/>
       </label>
-      <button type ="submit"> Explore!</button>
+      <button type="submit"> Explore!</button>
     </form>  
       </div>
 
       {
-                    (this.state.data && !this.state.error) &&
+                    (this.state.cityData && !this.state.error) &&
                     <main className="erroneus">
-                        <h3>{this.state.cityData.display_name}</h3>
+
+                        <h3>{this.state.cityData.place_id}</h3>
                         <Row>
                           <Col>
-                            Latitude: {this.state.cityData.lat}<br/>
+                            Latitude: {this.state.cityData.lat}
                             Longitude: {this.state.cityData.lon}
+
                             </Col>
+      
                         </Row>
-                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.data.lat},${this.state.data.lon}&zoom=12`} alt ="location map" id ="map"></img>
+                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt ="location map" id ="map" />
                     </main>
                 }
                 
