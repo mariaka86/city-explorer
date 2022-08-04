@@ -1,10 +1,8 @@
 
-import './App.css';
+import  './App.css';
 import React from 'react';
 import axios from 'axios';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import Weather from './Weather.js'
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -57,7 +55,7 @@ render() {
     <div className="App">
     <form onSubmit={this.submitCityHandler}>
       <label>
-        Pick a City
+        Pick a Location
         <input type="text" onChange={this.handleCityInput}/>
       </label>
       <button type="submit"> Explore!</button>
@@ -68,15 +66,16 @@ render() {
                     (this.state.cityData && !this.state.error) &&
                     <main className="erroneus">
 
-                        <h3>{this.state.cityData.place_id}</h3>
-                        <Row>
-                          <Col>
-                            Latitude: {this.state.cityData.lat}
-                            Longitude: {this.state.cityData.lon}
+                        <h3>{this.state.cityData.display_name}</h3>
+                        
+                          
+                            <p>Latitude: {this.state.cityData.lat} </p> 
+          
 
-                            </Col>
-      
-                        </Row>
+                           <p>Longitude: {this.state.cityData.lon} </p>
+
+                           <p> Weather Forecast:today in {this.state.cityData.display_name}</p>
+
                         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt ="location map" id ="map" />
                     </main>
                 }
