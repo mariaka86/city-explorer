@@ -68,7 +68,7 @@ render() {
                     (this.state.cityData && !this.state.error) &&
                     <main className="erroneus">
 
-                        <h3>{this.state.cityData.place_id}</h3>
+                        <h3>{this.state.cityData.display_name}</h3>
                         <Row>
                           <Col>
                             Latitude: {this.state.cityData.lat}
