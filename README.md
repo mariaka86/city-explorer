@@ -1,7 +1,3 @@
-
-# Documentation
-
-<img src= "Screenshot[2]-01.png" >
 # About
 Author: Mary Kariuki  Version: 1.0.0
 Deployment Page: https://fastidious-beignet-49079e.netlify.app/
@@ -19,5 +15,4 @@ This app uses React JSX and axios in communication with LocationIQ.
 08-01-2022 9:30 PM - Readme updated
 ## Credit and Collaborations
 ## Whiteboard image path
-
 
