@@ -2,16 +2,21 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-
+import Weather from "./Weather.js"
+import Card from 'react-bootstrap/Card'
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state={
       city:"",
-      searchLocations:[],
+      searchLocation:[],
       cityData:{},
+      lat:'',
+      lon: '',
+      mapPic:"",
       error:false,
       errorMessage:"",
+      weather:[]
     };
   }
 // calling api
@@ -27,13 +32,15 @@ event.preventDefault();
 //adding loc iq url
 //getting a cors error
 let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
+let mapPic=`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`
 try{
 //axios returns with location object
  let locationResponse = await axios.get(url);
 console.log("City Info:", locationResponse.data[0]);
   this.setState({
     cityData:locationResponse.data[0],
-    error:false
+    error:false,
+    mapPic:mapPic
   })
   
 } catch(error){
@@ -52,10 +59,13 @@ render() {
 
   return (
     <>
+    <header>
+      <h3> Go ahead and Explore!</h3>
+    </header>
     <div className="App">
     <form onSubmit={this.submitCityHandler}>
       <label>
-        Pick a City
+        Pick a City:
         <input type="text" onChange={this.handleCityInput}/>
       </label>
       <button type="submit"> Explore!</button>
@@ -64,18 +74,19 @@ render() {
 
       {
                     (this.state.cityData && !this.state.error) &&
-                    <main className="erroneus">
+                    <Card className="erroneus">
 
-                        <h3>{this.state.cityData.display_name}</h3>
-                        
-                           <p>Latitude: {this.state.cityData.lat} </p> 
-                            
-                           <p> Longitude: {this.state.cityData.lon}</p>
-
-                           <p> Weather Forecast:</p>
-
-                        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt ="location map" id ="map" />
-                    </main>
+                        <Card.Title>{this.state.cityData.display_name}</Card.Title>
+                        <Card.Text>
+                          {this.state.cityData.lat},{this.state.cityData.lon}
+                          
+                          </Card.Text>
+                        <Card.Img
+                        className= "cardImage"
+                        variant ="top"
+                        src = {this.state.mapPic}
+                        />
+                  </Card>
                 }
                 
                 {
@@ -91,4 +102,24 @@ render() {
   );
 }
 };
+// displayWeather = async(lat,lon)=>{
+//   try{
+//     const weather =await axios.get`${process.env.REACT_APP_SERVER}/weather,`
+//     {
+//       params:(
+//         latitude:lat,
+//         longitude:lon,
+//       searchQuery:this.state.city
+//         )
+//         this.setState({
+//           weather:weather.data
+//         })
+//     } catch (error){
+
+//       this.setState({
+//         this.setState
+//       })
+//     }
+// }
+// }
 export default App;
