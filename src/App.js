@@ -33,11 +33,12 @@ event.preventDefault();
 //getting a cors error
 try{
 //axios returns with location object
-let mapPic=`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`
-let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
 
+let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
  let locationResponse = await axios.get(url);
 console.log("City Info:", locationResponse.data[0]);
+let mapPic=`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${locationResponse.data[0].lat},${locationResponse.data[0].lon}&zoom=12`
+
 let lat =locationResponse.data[0].lat;
 let lon = locationResponse.data[0].lon;
   this.setState({
