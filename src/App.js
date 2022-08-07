@@ -11,12 +11,12 @@ class App extends React.Component{
       city:"",
       searchLocation:[],
       cityData:{},
-      lat:'',
-      lon: '',
+      lat:"",
+      lon:"",
       mapPic:"",
       error:false,
-      errorMessage:"",
-      weather:[]
+      anErrorMess:"",
+      weather:[],
     };
   }
 // calling api
@@ -31,27 +31,62 @@ event.preventDefault();
 
 //adding loc iq url
 //getting a cors error
-let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
-let mapPic=`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`
 try{
 //axios returns with location object
+let mapPic=`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`
+let url=(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATION_KEY}&q=${this.state.city}&format=json`);
+
  let locationResponse = await axios.get(url);
 console.log("City Info:", locationResponse.data[0]);
+let lat =locationResponse.data[0].lat;
+let lon = locationResponse.data[0].lon;
   this.setState({
     cityData:locationResponse.data[0],
     error:false,
-    mapPic:mapPic
-  })
+    mapPic:mapPic,
+    lat:lat,
+    lon:lon,
+    
+  });
+  this.displayWeather(lat,lon);
   
 } catch(error){
   this.setState({
-    error:error
+    error:error,
+    anErrorMess: `whoops there's an error ${error.response.status}`,
   });
-}
 
-};
+}
+}
+displayWeather = async(lat,lon)=>{
+    try{
+      const weather =await axios.get(`${process.env.REACT_APP_SERVER}/weather`,
+      {
+        params:{
+          lat:lat,
+          lon:lon,
+        searchQuery:this.state.city,
+        
+        },
+      }
+    );
+      this.setState({
+            weather:weather.data,
+            
+          });
+      } catch (error){
+  
+        this.setState({
+          mapPic:false,
+          error:true,
+          anErrorMess: `whoops there's an error ${error.response.status}`,
+
+        });
+      }
+  };
+  
 render() {
-  console.log ('from state',this.state.cityData, this.state.cityData.lon, this.state.cityData.lat);
+  console.log ('from state',this.state.cityData, this.state.cityData.lon, this.state.cityData.lat, );
 
 //  let stateList = this.state.locationResponse((stateName,index)=>{
 //   return <li key ={index}>{stateName.name}</li>
@@ -71,22 +106,28 @@ render() {
       <button type="submit"> Explore!</button>
     </form>  
       </div>
+      
 
-      {
-                    (this.state.cityData && !this.state.error) &&
+  { 
+                  (this.state.cityData && !this.state.error) &&
+                  <>
                     <Card className="erroneus">
-
+                      <Card.Body>
                         <Card.Title>{this.state.cityData.display_name}</Card.Title>
                         <Card.Text>
-                          {this.state.cityData.lat},{this.state.cityData.lon}
-                          
+                          {this.state.cityData.lat},{this.state.cityData.lon}                          
                           </Card.Text>
                         <Card.Img
                         className= "cardImage"
                         variant ="top"
                         src = {this.state.mapPic}
                         />
+                      </Card.Body>
                   </Card>
+                  
+                   <Weather weather ={this.state.weather} />
+                </>
+
                 }
                 
                 {
@@ -102,24 +143,5 @@ render() {
   );
 }
 };
-// displayWeather = async(lat,lon)=>{
-//   try{
-//     const weather =await axios.get`${process.env.REACT_APP_SERVER}/weather,`
-//     {
-//       params:(
-//         latitude:lat,
-//         longitude:lon,
-//       searchQuery:this.state.city
-//         )
-//         this.setState({
-//           weather:weather.data
-//         })
-//     } catch (error){
 
-//       this.setState({
-//         this.setState
-//       })
-//     }
-// }
-// }
 export default App;
