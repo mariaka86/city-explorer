@@ -7,7 +7,7 @@ import WeatherDay from './WeatherDay.js'
 class Weather extends React.Component {
 
     render() {   
-      return (
+      return  (
         <>
           <h3>Weather:</h3>
           {
