@@ -114,9 +114,9 @@ render() {
                   <>
                     <Card className="erroneus">
                       <Card.Body>
-                        <Card.Title>{this.state.cityData.display_name}</Card.Title>
+                        <Card.Title> Welcome to ! {this.state.cityData.display_name}</Card.Title>
                         <Card.Text>
-                          {this.state.cityData.lat},{this.state.cityData.lon}                          
+                          Latitude:{this.state.cityData.lat}<br></br>Longitude{this.state.cityData.lon}                          
                           </Card.Text>
                         <Card.Img
                         className= "cardImage"
