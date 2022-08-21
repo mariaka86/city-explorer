@@ -9,15 +9,15 @@ class WeatherDay extends React.Component {
     return (
       <>
       <Card>
-      {/* <Card.Img
-				variant="top"
-				src={`/icons/${this.props.day.icon}.png`}
-				style={{ width: '100px' }}
-			/> */}
       <Card.Text>
-        <p>{this.props.day.date}</p>
-        <p>{this.props.day.temp}</p>
-        <p>{this.props.day.description}</p>
+        <p>Date: {this.props.day.date}</p>
+        <p>Temp: {this.props.day.temp}</p>
+        <p>Max Temp : {this.props.day.max_temp} </p>
+        <p> Min Temp : {this.props.day.min_temp}</p>
+        <p>Description: {this.props.day.description}</p>
+        
+
+
         <p>{this.props.day.icon}</p>
       </Card.Text>
         </Card>

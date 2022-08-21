@@ -4,6 +4,8 @@ import React from 'react';
 import axios from 'axios';
 import Weather from "./Weather.js"
 import Card from 'react-bootstrap/Card'
+import Film from './Film';
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -17,6 +19,7 @@ class App extends React.Component{
       error:false,
       anErrorMess:"",
       weather:[],
+      film:[],
     };
   }
 // calling api
@@ -50,7 +53,7 @@ let lon = locationResponse.data[0].lon;
     
   });
   this.displayWeather(lat,lon);
-  
+  this.handleFilm(lat,lon);
 } catch(error){
   this.setState({
     error:error,
@@ -86,12 +89,37 @@ displayWeather = async(lat,lon)=>{
       }
   };
   
+ handleFilm = async (lat,lon,) => { 
+
+    try {
+      const film = await axios.get(`${process.env.REACT_APP_SERVER}/movies`,
+      {
+        params:{
+          lat:lat,
+          lon:lon,
+        searchQuery:this.state.city,   
+        },
+      }
+      );
+      this.setState({
+        film:film.data,
+      });
+
+    } catch (error) {
+      this.setState({
+        mapPic:false,
+        error:true,
+        anErrorMess: `whoops there's an error ${error.response.status}`,
+
+      });
+      
+    }
+  };
+ 
+  
 render() {
   console.log ('from state',this.state.cityData, this.state.cityData.lon, this.state.cityData.lat, );
 
-//  let stateList = this.state.locationResponse((stateName,index)=>{
-//   return <li key ={index}>{stateName.name}</li>
-//  })
 
   return (
     <>
@@ -106,7 +134,7 @@ render() {
       </label>
       <button type="submit"> Explore!</button>
     </form>  
-      </div>
+      </div> 
       
 
   { 
@@ -114,9 +142,9 @@ render() {
                   <>
                     <Card className="erroneus">
                       <Card.Body>
-                        <Card.Title> Welcome to ! {this.state.cityData.display_name}</Card.Title>
+                        <Card.Title> Welcome to {this.state.cityData.display_name} !</Card.Title>
                         <Card.Text>
-                          Latitude:{this.state.cityData.lat}<br></br>Longitude{this.state.cityData.lon}                          
+                          Latitude: {this.state.cityData.lat}<br></br>Longitude: {this.state.cityData.lon}                          
                           </Card.Text>
                         <Card.Img
                         className= "cardImage"
@@ -127,6 +155,7 @@ render() {
                   </Card>
                   
                    <Weather weather ={this.state.weather} />
+                   <Film film = {this.state.film}/>
                 </>
 
                 }
