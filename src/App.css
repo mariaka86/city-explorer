@@ -5,16 +5,17 @@
 }
 
 div {
-  background-image:url('city.jpg');
+  background-color: aliceblue;
   background-size: 1000px 1000px;
 
 }
 p{
-  color:aliceblue;
+  color:black;
 }
 h3{
-  color:aliceblue;
+  color:black;
 }
 .erroneus{
-  color: aliceblue;
+  color: black;
 }
+
