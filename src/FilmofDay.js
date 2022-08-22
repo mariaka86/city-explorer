@@ -8,12 +8,14 @@ class FilmofDay extends React.Component {
    
     return (
       <>
-      <Card>
-      <Card.Text>
-        <p>Title: {this.props.day.title}</p>
-        <p>Overview: {this.props.day.overview}</p>
-        <p>Date Of Release: {this.props.day.release_date} </p>
-      </Card.Text>
+      <Card style={{ width: "18rem" }} id = "moviecard">
+      <Card.Body>
+      <Card.Img src={this.props.day.src} />
+        <Card.Title>Title: {this.props.day.title}</Card.Title>
+        <Card.Text>Date Of Release: {this.props.day.release_date} </Card.Text>
+        <Card.Text>Overview: {this.props.day.overview}</Card.Text>
+       
+      </Card.Body>
         </Card>
       </>
     )
