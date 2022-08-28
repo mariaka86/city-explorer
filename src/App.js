@@ -6,6 +6,7 @@ import Weather from "./Weather.js"
 import Card from 'react-bootstrap/Card'
 import Film from './Film';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -134,41 +135,44 @@ class App extends React.Component {
             </label>
             <button type="submit"> Explore!</button>
           </form>
+
+
+
+          {
+            (this.state.cityData && !this.state.error) &&
+            <>
+
+              <Card className="erroneus" id='location'>
+                <Card.Body>
+                  <Card.Title> Welcome to {this.state.cityData.display_name} !</Card.Title>
+                  <Card.Text>
+                    Latitude: {this.state.cityData.lat}<br></br>Longitude: {this.state.cityData.lon}
+                  </Card.Text>
+                  <Card.Img
+                    className="cardImage"
+                    variant="top"
+                    src={this.state.mapPic}
+                    style={{ width: '35rem' }}
+                  />
+                </Card.Body>
+              </Card>
+              <Weather weather={this.state.weather} />
+              <Film film={this.state.film} />
+
+            </>
+
+          }
+
+          {
+            this.state.error &&
+            <main className="erroneus">
+              <h4>unable to geocode!</h4>
+              <p>
+                Error: {this.state.error.response.data.error}
+              </p>
+            </main>
+          }
         </div>
-
-
-        {
-          (this.state.cityData && !this.state.error) &&
-          <>
-            <Card className="erroneus" id='location'>
-              <Card.Body>
-                <Card.Title> Welcome to {this.state.cityData.display_name} !</Card.Title>
-                <Card.Text>
-                  Latitude: {this.state.cityData.lat}<br></br>Longitude: {this.state.cityData.lon}
-                </Card.Text>
-                <Card.Img
-                  className="cardImage"
-                  variant="top"
-                  src={this.state.mapPic}
-                />
-              </Card.Body>
-            </Card>
-            <Weather weather={this.state.weather} />
-            <Film film={this.state.film} />
-
-          </>
-
-        }
-
-        {
-          this.state.error &&
-          <main className="erroneus">
-            <h4>unable to geocode!</h4>
-            <p>
-              Error: {this.state.error.response.data.error}
-            </p>
-          </main>
-        }
       </>
     );
   }
