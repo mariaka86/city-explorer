@@ -1,21 +1,20 @@
 .App {
-  text-align: center;
-  background-color: aqua;
+  text-align: left;
   
 }
-
-div {
+body{
+  background-image: url('https://img.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_1017-25501.jpg');
+  background-size: 100%;
+}
+div{
   background-color: aliceblue;
-  background-size: 1000px 1000px;
-
 }
-p{
-  color:black;
+.card {
+  margin: 20px;
+  text-align: center;
+  
 }
-h3{
-  color:black;
+footer{
+  text-align: center;
+  color: white;
 }
-.erroneus{
-  color: black;
-}
-

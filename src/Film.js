@@ -1,6 +1,6 @@
 import React from 'react';
 import FilmofDay from './FilmofDay.js'
-
+import './App.css';
 
 
 
