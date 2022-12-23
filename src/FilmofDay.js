@@ -11,7 +11,7 @@ class FilmofDay extends React.Component {
       <>
         <Card style={{ width: "18rem", border: 'solid' }} id="moviecard">
           <Card.Body>
-            <Card.Img src={this.props.day.src} />
+            <Card.Img src={this.props.day.image_url} />
             <Card.Title>Title: {this.props.day.title}</Card.Title>
             <Card.Text>Date Of Release: {this.props.day.release_date} </Card.Text>
             <Card.Text>Overview: {this.props.day.overview}</Card.Text>

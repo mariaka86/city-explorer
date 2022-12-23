@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import axios from 'axios';
 import Weather from "./Weather.js"
-import Card from 'react-bootstrap/Card'
+import { Button, Card, Form, InputGroup, Badge } from 'react-bootstrap';
 import Film from './Film';
 
 
@@ -30,7 +30,7 @@ class App extends React.Component {
     });
   }
   //get location data
-  submitCityHandler = async (event) => {
+  submitCityHandler = async(event) => {
     event.preventDefault();
 
     //adding loc iq url
@@ -128,13 +128,13 @@ class App extends React.Component {
           <h3> Go ahead and Explore!</h3>
         </header>
         <div className="App">
-          <form onSubmit={this.submitCityHandler}>
-            <label>
-              Pick a City:
-              <input type="text" onChange={this.handleCityInput} />
-            </label>
-            <button type="submit"> Explore!</button>
-          </form>
+          <Form onSubmit={this.submitCityHandler}>
+            <InputGroup>
+            <InputGroup.Text color ="white"> Search Location</InputGroup.Text>
+            <Form.Control type="text"placeholder = 'Location' onChange={this.handleCityInput} ></Form.Control>
+            <Button type="submit"> Explore!</Button>
+            </InputGroup>
+          </Form>
 
 
 
@@ -150,7 +150,7 @@ class App extends React.Component {
                   </Card.Text>
                   <Card.Img
                     className="cardImage"
-                    variant="top"
+                    variant="bottom"
                     src={this.state.mapPic}
                     style={{ width: '35rem' }}
                   />

@@ -9,12 +9,14 @@ class Film extends React.Component {
     render() {   
       return  (
         <>
+        <div id = 'films'>
           <h3>Films:</h3>
           {
             this.props.film.map((day, index) => (
               <FilmofDay key={index} day={day}  />
                ))
           }
+          </div>
         </>
       )
     }

@@ -3,18 +3,54 @@
   
 }
 body{
-  background-image: url('https://img.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_1017-25501.jpg');
+  background-image: url('city.jpg');
   background-size: 100%;
+  background-color: #233326;
+
 }
-div{
-  background-color: aliceblue;
-}
-.card {
-  margin: 20px;
-  text-align: center;
+
+  .card {
+    margin: 20px;
+    background-color: #6c5ac8;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background-color:rgb(111, 46, 175);
+    border-color: rgb(23, 16, 16);
+  }
+  .btn-primary:hover {
+    border-color: white;
+  }
   
-}
+
+  #films, #weather{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  #weather.card {
+    align-items: center;
+    margin: 5px;
+  }
+
+  #films img {
+    width: 7rem;
+  }
+  #films .card {
+    width: 310px;
+    margin: 5px;
+  }
+
+  form {
+    margin: 20px;
+  }
+
 footer{
   text-align: center;
+  color: white;
+}
+
+h3{
   color: white;
 }
