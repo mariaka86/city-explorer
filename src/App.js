@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import axios from 'axios';
 import Weather from "./Weather.js"
-import { Button, Card, Form, InputGroup, Badge } from 'react-bootstrap';
+import { Button, Card, Form, InputGroup} from 'react-bootstrap';
 import Film from './Film';
 
 
