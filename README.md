@@ -13,7 +13,7 @@ Follow directions on Lab 6 of Delta V's code 301 course. More?
 This app uses React JSX and axios in communication with LocationIQ.
 
 ## Change Log
-08-01-2022 9:30 PM - Readme updated
+01-02-23 9:30 PM - Readme updated
 ## Credit and Collaborations
 ## Whiteboard image path
 
