@@ -1,6 +1,7 @@
 # About
 Author: Mary Kariuki  Version: 1.0.0
-Deployment Page: https://fastidious-beignet-49079e.netlify.app/
+Deployment Page: https://main--cite-explorer.netlify.app/
+
 ## Overview
 
 This app will let you get the latitude and longitude of a searched city along with a map image.
