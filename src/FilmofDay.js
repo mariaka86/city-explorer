@@ -9,7 +9,7 @@ class FilmofDay extends React.Component {
 
     return (
       <>
-        <Card style={{ width: "18rem", border: 'solid' }} id="moviecard">
+        <Card id="moviecard" style={{ width: "18rem", border: 'solid' }} >
           <Card.Body>
             <Card.Img src={this.props.day.image_url} />
             <Card.Title>Title: {this.props.day.title}</Card.Title>

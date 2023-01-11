@@ -130,7 +130,7 @@ class App extends React.Component {
         <div className="App">
           <Form onSubmit={this.submitCityHandler}>
             <InputGroup>
-            <InputGroup.Text color ="white"> Search Location</InputGroup.Text>
+            <InputGroup.Text color ="red"> Search Location</InputGroup.Text>
             <Form.Control type="text"placeholder = 'Location' onChange={this.handleCityInput} ></Form.Control>
             <Button type="submit"> Explore!</Button>
             </InputGroup>
