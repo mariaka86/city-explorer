@@ -5,6 +5,7 @@ import axios from 'axios';
 import Weather from "./Weather.js"
 import { Button, Card, Form, InputGroup} from 'react-bootstrap';
 import Film from './Film';
+import Food from './Food'
 
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
       anErrorMess: "",
       weather: [],
       film: [],
+      food:[],
     };
   }
   // calling api
@@ -53,6 +55,7 @@ class App extends React.Component {
         lon: lon,
 
       });
+      this.displayRestaurant(lat,lon);
       this.displayWeather(lat, lon);
       this.handleFilm(lat, lon);
     } catch (error) {
@@ -90,6 +93,8 @@ class App extends React.Component {
     }
   };
 
+
+
   handleFilm = async (lat, lon,) => {
 
     try {
@@ -116,6 +121,30 @@ class App extends React.Component {
 
     }
   };
+  displayRestaurant = async(lat,lon,)=>{
+    try{
+      const food = await axios.get(`${process.env.REACT_APP_SERVER}/food`,
+      {
+        params:{
+          lat: lat,
+          lon: lon,
+          searchQuery: this.state.city,
+
+        },
+      }
+      );
+      this.setState({
+        food:food.data
+      })
+    }catch (error) {
+      this.setState({
+        mapPic: false,
+        error: true,
+        anErrorMess: `whoops there's an error ${error.response.status}`,
+
+      });
+  }
+}
 
 
   render() {
@@ -158,6 +187,7 @@ class App extends React.Component {
               </Card>
               <Weather weather={this.state.weather} />
               <Film film={this.state.film} />
+              <Food food ={this.state.food}/>
 
             </>
 

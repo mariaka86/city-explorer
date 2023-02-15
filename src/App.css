@@ -31,7 +31,7 @@ body{
   }
   
 
-  #films, #weather{
+  #films, #weather,#food{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -50,12 +50,26 @@ body{
     margin: 5px;
   }
 
+  #food.card{
+    align-items: center;
+    margin:3px
+  }
+
+#food img{
+  width:7rem;
+}
+
+
+
   form {
     margin: 20px;
   }
 
 footer{
   text-align: center;
+}
+#foodcard{
+  background-color: #6c5ac8;
 }
 
 #forecastcard{
