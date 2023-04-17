@@ -1,6 +1,6 @@
 # About
 Author: Mary Kariuki  Version: 1.0.0
-Deployment Page:https://cite-explorer.netlify.app/
+Deployment Page: https://cite-explorer.netlify.app/
 
 ## Overview
 
