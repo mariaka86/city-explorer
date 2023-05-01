@@ -15,6 +15,8 @@ class Weather extends React.Component {
           {
             this.props.weather.map((day, index) => (
               <WeatherDay key={index} day={day}  />
+              // <FirstTab key={index} day={day}/>
+
                ))
           }
           </div>

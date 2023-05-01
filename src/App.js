@@ -2,10 +2,15 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import Weather from "./Weather.js"
+import Weather from "./Components/Weather.js"
 import { Button, Card, Form, InputGroup} from 'react-bootstrap';
-import Film from './Film';
-import Food from './Food'
+import Film from './Components/Film';
+import Food from './Components/Food';
+import Tab from '@mui/base/Tab';
+import TabsList from '@mui/base/TabsList';
+import TabPanel from '@mui/base/TabPanel';
+import Tabs from '@mui/base/Tabs';
+
 
 
 class App extends React.Component {
@@ -157,6 +162,8 @@ class App extends React.Component {
           <h3> Go ahead and Explore!</h3>
         </header>
         <div className="App">
+
+
           <Form onSubmit={this.submitCityHandler}>
             <InputGroup>
             <InputGroup.Text color ="red"> Search Location</InputGroup.Text>
@@ -165,12 +172,17 @@ class App extends React.Component {
             </InputGroup>
           </Form>
 
-
+       
 
           {
+              <>
+            <Tabs>
+              <TabsList>
+                
+          
             (this.state.cityData && !this.state.error) &&
-            <>
-
+          
+   
               <Card className="erroneus" id='location'>
                 <Card.Body>
                   <Card.Title> Welcome to {this.state.cityData.display_name} !</Card.Title>
@@ -185,12 +197,22 @@ class App extends React.Component {
                   />
                 </Card.Body>
               </Card>
-              <Weather weather={this.state.weather} />
+                 <Tab value = {1}>
+    
+   
+            </Tab>
+            <TabPanel value={1}> <Weather weather={this.state.weather} /></TabPanel>
               <Film film={this.state.film} />
+
               <Food food ={this.state.food}/>
 
+      
+              
+     
+            </TabsList>
+            </Tabs>
+          
             </>
-
           }
 
           {

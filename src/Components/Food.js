@@ -1,6 +1,6 @@
 import React from 'react';
 import FoodofDay from './FoodDay.js'
-import './App.css';
+import '../App.css';
 
 
 
